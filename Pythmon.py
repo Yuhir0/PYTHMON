@@ -85,7 +85,6 @@ for i in range(3):
 for i in range(3):
 	print mipythmon[i][0]
 
-
 atacant = mipythmon[0]
 enemic = contrari[0]
 while mipythmon[0][2] > 0 and mipythmon[1][2] > 0 and mipythmon[2][2] > 0 or contrari[0][2] > 0 and contrari[1][2] > 0 and contrari[2][2] >0:
