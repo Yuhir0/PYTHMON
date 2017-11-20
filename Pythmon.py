@@ -22,77 +22,6 @@ def clear():
         raise "No es pot netegar la pantalla"
         print  "<-No s'ha pogut netejar la pantalla->"
 
-
-
-
-
-# Es defineixen els atacs
-def Surf():
-	if enemic[1] == "Foc":
-		mal = (90 + atacant[3] - enemic[4]) * 2
-		escenari()
-		print "+-----------------------------------------------------------+"
-		print atacant[0],"ha usat Surf, es molt efectiu."
-		print "+-----------------------------------------------------------+"
-	elif enemic[1] == "Planta":
-		mal = (90 + atacant[3] - enemic[4]) * 0.5
-		escenari()
-		print "+-----------------------------------------------------------+"
-		print atacant[0],"ha usat Surf, no es gaire efetiu."
-		print "+-----------------------------------------------------------+"
-	else:
-		mal = 90 + atacant[3] - enemic[4]
-		escenari()
-		print "+-----------------------------------------------------------+"
-		print atacant[0],"ha usat Surf."
-		print "+-----------------------------------------------------------+"
-	enemic[2] -= int(mal)
-
-def Llancaflames():
-	if enemic[1] == "Planta":
-		mal = (90 + atacant[3] - enemic[4]) * 2
-		print atacant[0],"ha usat Llançaflames, es molt efectiu."
-	elif enemic[1] == "Aigua":
-		mal = (90 + atacant[3] - enemic[4]) * 0.5
-		print atacant[0],"ha usat Llançaflames, no es gaire efectiu."
-	else:
-		mal = 90 + atacant[3] - enemic[4]
-		print atacant[0],"ha usat Llançaflames."
-	enemic[2] -= int(mal)
-
-def Gigadrenatge():	
-	if enemic[1] == "Aigua":
-		mal = (80 + atacant[3] - enemic[4]) * 2
-		clear()
-		escenari()
-		print "+-----------------------------------------------------------+"
-		print atacant[0],"ha usat Gigadrenatge, es molt efectiu."
-		print "+-----------------------------------------------------------+"
-	elif enemic[1] == "Foc":
-		mal = (80 + atacant[3] - enemic[4]) * 0.5
-		clear()
-		escenari()
-		print "+-----------------------------------------------------------+"
-		print atacant[0],"ha usat Gigadrenatge, no es gaire efectiu."
-		print "+-----------------------------------------------------------+"
-	else:
-		mal = 80 + atacant[3] - enemic[4]
-		clear()
-		escenari()
-		print "+-----------------------------------------------------------+"
-		print atacant[0],"ha usat Gigadrenatge."
-		print "+-----------------------------------------------------------+"
-	enemic[2] -= int(mal)
-
-# Es l'apariencia del escenari.
-def escenari():
-	print "			",enemic[0],"|vida:",enemic[2]
-	print "\n\n\n\n"
-	print atacant[0],"|vida:",atacant[2]
-
-contrari = [[""],[""],[""]] # Espai per als pythmon del oponent
-mipythmon = [[""],[""],[""]] # Espai per als pythmon del jugador
-
 """ 
 Aqui estan tos els pythmon amb el seguient ordre Nom, Tipus, Vida, Atac, Defensa,
 Velocitat, Atac1, Atac2, Atac3.
@@ -117,118 +46,102 @@ pythmon = [["Bulbasaur","Planta",231,147,134,126],
 		["Lapras","Aigua",401,226,196,156],
 		["Magikarp","Aigua",999,999,999,1]]
 
-# S'executa el joc
-def joc(combat):
-	while combat <= 10:
-		print combat
-		for i in range(3):
-			rnd = random.randint(0,17)
-			contrari[i] = pythmon[rnd]
-		rotacio = 0
-		atacant = mipythmon[0]
-		enemic = contrari[rotacio]
-		
-		# Comença la animació del principi del combat
-		print "\n\n\n\n\n\n\n"
-		print "+-----------------------------------------------------------+"
-		print "",Nom, "el teu oponent sera en Marcos"
-		print "+-----------------------------------------------------------+"
-		time.sleep(2)
-		clear()
-		print enemic[0],"|vida:",enemic[2]
-		print "\n\n\n\n\n\n"
-		print "+-----------------------------------------------------------+"
-		print " Marcos a tret a", enemic[0]
-		print "+-----------------------------------------------------------+"
-		time.sleep(0.3)
-		clear()
-		print "	",enemic[0],"|vida:",enemic[2]
-		print "\n\n\n\n\n\n"
-		print "+-----------------------------------------------------------+"
-		print " Marcos a tret a", enemic[0]
-		print "+-----------------------------------------------------------+"
-		time.sleep(0.3)
-		clear()
-		print "		",enemic[0],"|vida:",enemic[2]
-		print "\n\n\n\n\n\n"
-		print "+-----------------------------------------------------------+"
-		print " Marcos a tret a", enemic[0]
-		print "+-----------------------------------------------------------+"
-		time.sleep(0.3)
-		clear()
-		print "			",enemic[0],"|vida:",enemic[2]
-		print "\n\n\n\n\n\n"
-		print "+-----------------------------------------------------------+"
-		print " Marcos a tret a", enemic[0]
-		print "+-----------------------------------------------------------+"
-		time.sleep(1)
-		clear()
-		print "			",enemic[0],"|vida:",enemic[2]
-		print "\n\n\n\n\n"
-		print "			",atacant[0],"|vida:",atacant[2]
-		print "+-----------------------------------------------------------+"
-		print " Has tret a", atacant[0]
-		print "+-----------------------------------------------------------+"
-		time.sleep(0.3)
-		clear()
-		print "			",enemic[0],"|vida:",enemic[2]
-		print "\n\n\n\n\n"
-		print "		",atacant[0],"|vida:",atacant[2]
-		print "+-----------------------------------------------------------+"
-		print " Has tret a", atacant[0]
-		print "+-----------------------------------------------------------+"
-		time.sleep(0.3)
-		clear()
-		print "			",enemic[0],"|vida:",enemic[2]
-		print "\n\n\n\n\n"
-		print "	",atacant[0],"|vida:",atacant[2]
-		print "+-----------------------------------------------------------+"
-		print " Has tret a", atacant[0]
-		print "+-----------------------------------------------------------+"
-		time.sleep(0.3)
-		clear()
-		escenari()
-		print "+-----------------------------------------------------------+"
-		print " Has tret a", atacant[0]
-		print "+-----------------------------------------------------------+"
-		# Acaba la animacio d'inici del combat.
-		
-		clear()
-		escenari()
-		while True:
-			print "+-----------------------------------------------------------+"
-			print " Fes el teu moviment"
-			print "+-----------------------------------------------------------+"
-			print "1)",atacant[6],"5) Pythmon"
-			torn = int(input())
-			if torn == 5:
-				for i in range(3):
-					print mipythmon[i][0]
-				escull = int(input("Escull pythmon: "))
-				atacant = mipythmon[escull]
-			elif torn > 0 and torn < 5:
-				if atacant[torn+5] == "Llançaflames":
-					Llancaflames()
-				elif atacant[torn+5] == "Surf":
-					Surf()
-				elif atacant[torn+5] == "Gigadrenatge":
-					Gigadrenatge()
-			time.sleep(1)
-			if contrari[2][2] < 0:
-				clear()
-				print "\n\n\n\n\n\n\n"
-				print "+-----------------------------------------------------------+"
-				print " Has guanyat"
-				print "+-----------------------------------------------------------+"
-				time.sleep(2)
-				break
-			if enemic[2] < 1:
-				rotacio += 1
-				enemic = contrari[rotacio]	
+# Es l'apariencia de cada moment del joc.
+def pantalla(text,escena):
+	escriu = " "
+	if escena == 0:
+		for i in text:
+			escriu += i
+			print "\n\n\n\n\n\n\n"
+			print "+-----------------------------------------------+"
+			print escriu
+			print "+-----------------------------------------------+"
+			time.sleep(0.05)
 			clear()
-			escenari()
-		combat += 1
+		print "\n\n\n\n\n\n\n"
+		print "+-----------------------------------------------+"
+		print "",text
+		print "+-----------------------------------------------+"
 		
+	elif escena == 1:
+		for i in text:
+			escriu += i
+			clear()
+			print "\n\n\n\n\n\n\n"
+			print "+-----------------------------------------------+"
+			print escriu
+			print "+-----------------------------------------------+"
+			time.sleep(0.05)
+			
+		
+		time.sleep(0.3)
+			
+		for i in range(4):
+			clear()
+			for j in range(i):
+				print "\t",
+			print encombat[1][0] + " | vida:",encombat[1][2]
+			print "\n\n\n\n\n\n"
+			print "+-----------------------------------------------+"
+			print " " + text
+			print "+-----------------------------------------------+"
+			time.sleep(0.2)
+	
+	elif escena == 2:	
+		for i in text:
+			escriu += i
+			clear()
+			print "\t\t\t" + encombat[1][0] + " | vida:",encombat[1][2]
+			print "\n\n\n\n\n\n"
+			print "+-----------------------------------------------+"
+			print escriu
+			print "+-----------------------------------------------+"
+			time.sleep(0.05)
+		
+		time.sleep(0.3)
+		
+		for i in range(5,-1,-1):
+			clear()
+			print "\t\t\t" + encombat[1][0] + " | vida:",encombat[1][2]
+			print "\n\n\n\n\n"
+			for j in range(i,0,-1):
+				print "\t",
+			print encombat[0][0] + " | vida:",encombat[0][2]
+			print "+-----------------------------------------------+"
+			print " " + text
+			print "+-----------------------------------------------+"
+			time.sleep(0.2)
+	
+	elif escena == 3:
+		for i in text:
+			escriu += i
+			clear()
+			print "\t\t\t" + encombat[1][0] + " | vida:",encombat[1][2]
+			print "\n\n\n\n\n"
+			print encombat[0][0] + " | vida:",encombat[0][2]
+			print "+-----------------------------------------------+"
+			print escriu
+			print "+-----------------------------------------------+"
+			time.sleep(0.05)
+
+
+# Es defineixen els atacs
+def Atac(tipus,potencia,encombat,torn):	
+	if tipus == "Planta" and encombat[1][1] == "Aigua" or tipus == "Foc" and encombat[1][1] == "Planta" or tipus == "Aigua" and encombat[1][1] == "Foc":
+		mal = (potencia + encombat[0][3] - encombat[1][4]) * 2
+		pantalla(encombat[0][0] + " ha usat " + encombat[0][torn] + ", es molt efectiu.", 3)
+		
+	elif tipus == "Planta" and encombat[1][1] == "Foc" or tipus == "Foc" and encombat[1][1] == "Aigua" or tipus == "Aigua" and encombat[1][1] == "Planta":
+		mal = (potencia + encombat[0][3] - encombat[1][4]) * 0.5
+		pantalla(encombat[0][0] + " ha usat " + encombat[0][torn] + ", no es gaire efectiu.", 3)
+		
+	else:
+		mal = potencia + encombat[0][3] - encombat[1][4]
+		pantalla(encombat[0][0] + " ha usat " + encombat[0][torn] + ".", 3)
+	encombat[1][2] -= int(mal)
+
+
+mipythmon = [[""],[""],[""]] # Espai per als pythmon del jugador		
 # Avans de iniciar el joc et demana un nom
 print "Quin es el tu nom?"
 Nom = raw_input()
@@ -238,7 +151,7 @@ Nom = raw_input()
 l'usuari hi es al fitxer xml i preguntar-li si vol continuar la partida
 anterior 
 """
-save = etree.parse('partida.xml')
+"""save = etree.parse('partida.xml')
 jugadors = save.findall("jugador")
 lj = len(jugadors)
 for i in range(lj):
@@ -250,14 +163,15 @@ for i in range(lj):
 			mipythmon[n] = p[n].attrib["num"]
 		c = jugadors[i].findall("combat")
 		combat = c[0].attrib["cont"]
-		joc(combat)
+		joc(combat,mipythmon)
 		break
-	elif i == j-1 and Nom != jugadors[j-1].attrib["nom"]:
+	elif i == lj-1 and Nom != jugadors[lj-1].attrib["nom"]:
 		print "Benvingut a la nostra torre Pythmon, guanya\na tots entrenadores i aconsegueix la vicotria"
 
 if combat >= 10:
 	exit()
-	
+"""
+
 # Llista els pythmon en dos columnes per a que el jugador els pugui veure
 for i in range(9):
 	print str(i)+")",pythmon[i][0],"	",
@@ -265,14 +179,68 @@ for i in range(9):
 
 # Demana al jugador que esculli 3 pythmon i els guarda
 for i in range(3):
-	escull = int(input("Escuell el teu " + str(i + 1) + " pythmon: "))
-	mipythmon[i] = pythmon[escull]
+	escull = int(input("Escull el teu " + str(i + 1) + " pythmon: "))
+	mipythmon[i] = pythmon[escull][:]
 
 # Mostra els pythmon escollits pel jugador
 for i in range(3):
 		print mipythmon[i][0]
 
-time.sleep(5)	
-clear() 
+
+time.sleep(2.5)	
 combat = 1
-joc(combat)
+
+
+encombat=[[""],[""]]
+contrari = [[""],[""],[""]] # Espai per als pythmon del oponent
+
+while combat <= 10:
+	clear()
+	for i in range(3):
+		rnd = random.randint(0,17)
+		contrari[i] = pythmon[rnd][:]
+
+	rotacio = 0
+	encombat[0] = mipythmon[0]
+	encombat[1] = contrari[rotacio]
+	
+	# Comença la animació del principi del combat
+	pantalla(Nom + " el teu oponent sera en Marcos", 0)
+	time.sleep(2)
+	pantalla("Marcos a tret a " + encombat[1][0],1)
+	time.sleep(1)
+	pantalla("Has tret a " + encombat[0][0], 2)
+	time.sleep(1)
+	
+	# Acaba la animacio d'inici del combat.
+	while True:
+		pantalla("Fes el teu moviment", 3)
+		print "1)",encombat[0][6],"5) Pythmon"
+		torn = int(input())
+		if torn == 5:
+			for i in range(3):
+				print mipythmon[i][0]
+			escull = int(input("Escull pythmon: "))
+			encombat[0] = mipythmon[escull]
+		elif torn > 0 and torn < 5:
+			torn+= 5
+			if encombat[0][torn] == "Llançaflames":
+				Atac("Foc", 90,encombat,torn)
+			elif encombat[0][torn] == "Surf":
+				Atac("Aigua", 90,encombat,torn)
+			elif encombat[0][torn] == "Gigadrenatge":
+				Atac("Planta", 80,encombat,torn)
+		time.sleep(1)
+		if contrari[2][2] < 0:
+			clear()
+			print "\n\n\n\n\n\n\n"
+			print "+-----------------------------------------------------------+"
+			print " Has guanyat"
+			print "+-----------------------------------------------------------+"
+			time.sleep(2)
+			break
+		if encombat[1][2] < 1:
+			rotacio += 1
+			encombat[1] = contrari[rotacio]	
+		clear()
+	combat += 1
