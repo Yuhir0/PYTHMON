@@ -168,31 +168,36 @@ l'usuari hi es al fitxer xml i preguntar-li si vol continuar la partida
 anterior 
 """
 
-save = etree.parse('partida.xml') # Carreguem el fixer 'partida.xml' que conte les dades dels jugadrs
-jugadors = save.findall("jugador") # Trobem tots el jugadors
+partida = etree.parse('partida.xml') # Carreguem el fixer 'partida.xml' que conte les dades dels jugadrs
+jugadors = partida.findall("jugador") # Trobem tots el jugadors
 
 lj = len(jugadors) # Averigüem quants jugadors són
 
 for i in range(lj):
 	if Nom == jugadors[i].attrib["nom"]:
+		num = i # Guardara la pocicio del jugador a la llista
 		print "Tens una partida començada"
 		p = jugadors[i].findall("pythmon") # Trobem tots els pythmon si el jugador esta registrat
 		
 		for n in range(3):
 			mipythmon[n] = pythmon[int(p[n].attrib["num"])]
-		c = jugadors[i].findall("combat") # Trobem els combats
-		combat = int(c[0].attrib["cont"]) # El convertim a enter i li assignem a combat
+		combat = int(jugadors[i].find("combat").attrib["cont"]) # El convertim a enter i li assignem a combat
 		break
 	elif i == lj-1 and Nom != jugadors[lj-1].attrib["nom"]:
 		print "Benvingut a la nostra torre Pythmon, guanya\na tots entrenadores i aconsegueix la vicotria"
 
 #if combat > 10: # Si el jugador te mes de 10 combats ja el ha fet tots
 #	exit()
-print combat
+
 if combat > 1 and combat < 10: # Si el jugador ha fet més d'un combat indicara la ronda y pasara al while del joc.
 	print "Vas per la ronda",combat
 	
 else:
+	# Formulem el xml per inscriure un nou jugador
+	save = partida.getroot()
+	noujugador = etree.Element("jugador", nom=Nom)
+	save.append(noujugador)
+	
 	# Llista els pythmon en dos columnes per a que el jugador els pugui veure
 	for i in range(9):
 		print str(i)+")",pythmon[i][0],"	",
@@ -202,15 +207,27 @@ else:
 	for i in range(3):
 		escull = int(input("Escull el teu " + str(i + 1) + " pythmon: "))
 		mipythmon[i] = pythmon[escull][:]
+		
+		# Registrem els pythmon en format xml
+		p = etree.Element("pythmon", num=str(escull))
+		noujugador.append(p)
 
 	# Mostra els pythmon escollits pel jugador
 	for i in range(3):
 			print mipythmon[i][0]
+	
+	# Guardem en format xml els combats
+	cont = etree.Element("combat", cont=str(combat))
+	noujugador.append(cont)
+	jugadors = partida.findall("jugador")
+	num = len(jugadors) - 1
 
+# Guardem totes les dades formulades del xml al fitxer 'partida.xml'			
+partida.write('partida.xml')
 
 time.sleep(2.5)	
 
-print combat
+
 encombat=[[""],[""]]
 contrari = [[""],[""],[""]] # Espai per als pythmon del oponent
 
@@ -280,7 +297,6 @@ while combat <= 10:
 			encombat[1] = contrari[rotacio]
 			time.sleep(0.5)
 			pantalla("Marcos a tret a " + encombat[1][0],1)
-		encombat[0][2] = 0
 		
 		# Si es devilita tot l'equip del jugador
 		if mipythmon[0][2] < 1 and mipythmon[1][2] < 1 and mipythmon[2][2] < 1:
@@ -303,3 +319,8 @@ while combat <= 10:
 			encombat[0] = mipythmon[escull - 1]
 		clear()
 	combat += 1
+	
+	jugadors[num].find("combat").attrib["cont"]=str(combat)
+	
+	# Guardem totes les dades formulades del xml al fitxer 'partida.xml'			
+	partida.write('partida.xml')

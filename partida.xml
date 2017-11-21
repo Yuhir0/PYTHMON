@@ -9,6 +9,6 @@
         <pythmon num="2"/>
         <pythmon num="5"/>
         <pythmon num="8"/>
-        <combat cont="2"/>
+        <combat cont="3"/>
     </jugador>
 </PYTHMON>
