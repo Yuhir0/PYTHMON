@@ -1,0 +1,14 @@
+<PYTHMON>
+    <jugador nom="Yuhiro">
+        <pythmon num="2"/>
+        <pythmon num="5"/>
+        <pythmon num="8"/>
+        <combat cont="5"/>
+    </jugador>
+    <jugador nom="Oscar">
+        <pythmon num="2"/>
+        <pythmon num="5"/>
+        <pythmon num="8"/>
+        <combat cont="3"/>
+    </jugador>
+<jugador nom="dani"><pythmon num="2"/><pythmon num="5"/><pythmon num="8"/><combat cont="3"/></jugador></PYTHMON>
