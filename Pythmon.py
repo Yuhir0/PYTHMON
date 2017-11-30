@@ -27,26 +27,25 @@ def clear():
 Aqui estan tos els pythmon amb el seguient ordre Nom, Tipus, Vida, Atac, Defensa,
 Velocitat, Atac1, Atac2, Atac3.
 """
-pythmon = [["Bulbasaur","Planta",231,147,134,126],
-		["Ivysaur","Planta",261,176,162,156],
+pythmon = [["Bulbasaur","Planta",231,147,134,126,"Gigadrenatge"],
+		["Ivysaur","Planta",261,176,162,156,"Gigadrenatge"],
 		["Venusaur","Planta",301,220,202,196,"Gigadrenatge"],
-		["Squirtle","Aigua",229,145,166,122],
-		["Wartortle","Aigua",259,178,196,152],
+		["Squirtle","Aigua",229,145,166,122,"Surf"],
+		["Wartortle","Aigua",259,178,196,152,"Surf"],
 		["Blastoise","Aigua",299,222,236,192,"Surf"],
-		["Charmander","Foc",219,154,122,166],
-		["Charmeleon","Foc",257,180,152,196,],
+		["Charmander","Foc",219,154,122,166,"Llançaflames"],
+		["Charmeleon","Foc",257,180,152,196,"Llançaflames"],
 		["Charizard","Foc",297,224,192,236,"Llançaflames"],
-		["Vulpix","Foc",217,129,116,166],
-		["Ninetales","Foc",287,206,186,236],
-		["Exeggcute","Planta",261,127,196,116],
-		["Exeggutor","Planta",331,248,206,146],
-		["Staryu","Aigua",201,138,146,206],
-		["Starmie","Aigua",261,204,206,266],
-		["Magmar","Foc",271,248,150,222],
-		["Tangela","Planta",271,160,266,156],
-		["Lapras","Aigua",401,226,196,156],
+		["Vulpix","Foc",217,129,116,166,"Llançaflames"],
+		["Ninetales","Foc",287,206,186,236,"Llançaflames"],
+		["Exeggcute","Planta",261,127,196,116,"Gigadrenatge"],
+		["Exeggutor","Planta",331,248,206,146,"Gigadrenatge"],
+		["Staryu","Aigua",201,138,146,206,"Surf"],
+		["Starmie","Aigua",261,204,206,266,"Surf"],
+		["Magmar","Foc",271,248,150,222,"Llançaflames"],
+		["Tangela","Planta",271,160,266,156,"Gigadrenatge"],
+		["Lapras","Aigua",401,226,196,156,"Surf"],
 		["Magikarp","Aigua",999,999,999,1]]
-
 
 # Es l'apariencia de cada moment del joc (animacions)
 def pantalla(text,escena):
@@ -135,23 +134,23 @@ def pantalla(text,escena):
 
 
 # Es defineixen els atacs
-def Atac(tipus,potencia,encombat,torn):
+def Atac(tipus,potencia,atacant,defensor,torn):
 	
 	# Atacs molt efectius
-	if tipus == "Planta" and encombat[1][1] == "Aigua" or tipus == "Foc" and encombat[1][1] == "Planta" or tipus == "Aigua" and encombat[1][1] == "Foc":
-		mal = (potencia + encombat[0][3] - encombat[1][4]) * 2
-		pantalla(encombat[0][0] + " ha usat " + encombat[0][torn] + ", es molt efectiu.", 3)
+	if tipus == "Planta" and defensor[1] == "Aigua" or tipus == "Foc" and defensor[1] == "Planta" or tipus == "Aigua" and defensor[1] == "Foc":
+		mal = (potencia + atacant[3] - defensor[4]) * 2
+		pantalla(atacant[0] + " ha usat " + atacant[torn] + ", es molt efectiu.", 3)
 	
 	# Atacs poc efectius
-	elif tipus == "Planta" and encombat[1][1] == "Foc" or tipus == "Foc" and encombat[1][1] == "Aigua" or tipus == "Aigua" and encombat[1][1] == "Planta":
-		mal = (potencia + encombat[0][3] - encombat[1][4]) * 0.5
-		pantalla(encombat[0][0] + " ha usat " + encombat[0][torn] + ", no es gaire efectiu.", 3)
+	elif tipus == "Planta" and defensor[1] == "Foc" or tipus == "Foc" and defensor[1] == "Aigua" or tipus == "Aigua" and defensor[1] == "Planta":
+		mal = (potencia + atacant[3] - defensor[4]) * 0.5
+		pantalla(atacant[0] + " ha usat " + atacant[torn] + ", no es gaire efectiu.", 3)
 		
 	# Atacs efectius
 	else:
-		mal = potencia + encombat[0][3] - encombat[1][4]
-		pantalla(encombat[0][0] + " ha usat " + encombat[0][torn] + ".", 3)
-	encombat[1][2] -= int(mal)
+		mal = potencia + atacant[3] - defensor[4]
+		pantalla(atacant[0] + " ha usat " + atacant[torn] + ".", 3)
+	defensor[2] -= int(mal)
 
 
 mipythmon = [[""],[""],[""]] # Espai per als pythmon del jugador		
@@ -188,7 +187,6 @@ for i in range(lj):
 
 #if combat > 10: # Si el jugador te mes de 10 combats ja el ha fet tots
 #	exit()
-
 if combat > 1 and combat < 10: # Si el jugador ha fet més d'un combat indicara la ronda y pasara al while del joc.
 	print "Vas per la ronda",combat
 	
@@ -205,12 +203,12 @@ else:
 
 	# Demana al jugador que esculli 3 pythmon i els guarda
 	for i in range(3):
-		escull = int(input("Escull el teu " + str(i + 1) + " pythmon: "))
-		mipythmon[i] = pythmon[escull][:]
+		escull[i] = int(input("Escull el teu " + str(i + 1) + " pythmon: "))
+		#mipythmon[i] = pythmon[escull[i]][:]
 		
 		# Registrem els pythmon en format xml
-		p = etree.Element("pythmon", num=str(escull))
-		noujugador.append(p)
+		#p = etree.Element("pythmon", num=str(escull))
+		#noujugador.append(p)
 
 	# Mostra els pythmon escollits pel jugador
 	for i in range(3):
@@ -239,7 +237,9 @@ while combat <= 10:
 	for i in range(3):
 		rnd = random.randint(0,17)
 		contrari[i] = pythmon[rnd][:]
-
+	for i in escull:
+		mipythmon[i] = pythmon[i][:]
+		
 	rotacio = 0
 	encombat[0] = mipythmon[0]
 	encombat[1] = contrari[rotacio] # Cada cop que es mori un pythmon el contrari canviara al següent
@@ -270,17 +270,53 @@ while combat <= 10:
 					print str(i+1) + ") " + mipythmon[i][0]
 				escull = int(input())
 			encombat[0] = mipythmon[escull - 1]
+		cops = 0
+		while cops < 2:
+			fst = 0
+			snd = 0
+			if torn > 0 and torn < 5 and encombat[0][5] > encombat[1][5]: # Si el jugador ataca i es més ràpid que l'enemic, atacarà primer.
+				if cops == 0:
+					fst = 0
+					snd = 1
+				else:
+					torn = 1#random.randint(1,4)
+					fst = 1
+					snd = 0
+			elif torn > 0 and torn < 5 and encombat[0][5] < encombat[1][5]: # Si el jugador ataca i es més lent que l'enemic, atacarà segon.
+				if cops == 0:
+					fst = 1
+					snd = 0
+					torn = 1#random.randint(1,4)
+				else:
+					fst = 0
+					snd = 1
+			elif torn > 4:
+				fst = 1
+				snd = 0
+				cops = 2
+				torn = 1#random.randint(1,4)
 			
-		elif torn > 0 and torn < 5:
-			torn+= 5
-			if encombat[0][torn] == "Llançaflames":
-				Atac("Foc", 90,encombat,torn)
-			elif encombat[0][torn] == "Surf":
-				Atac("Aigua", 90,encombat,torn)
-			elif encombat[0][torn] == "Gigadrenatge":
-				Atac("Planta", 80,encombat,torn)
+			# Els Atacs
+			if encombat[fst][torn + 5] == "Llançaflames":
+				Atac("Foc", 90,encombat[fst],encombat[snd],torn + 5)
+			elif encombat[fst][torn + 5] == "Surf":
+				Atac("Aigua", 90,encombat[fst],encombat[snd],torn + 5)
+			elif encombat[fst][torn + 5] == "Gigadrenatge":
+				Atac("Planta", 80,encombat[fst],encombat[snd],torn + 5)
+			
+			# Quan es devilita el pythmon, s'acaba la ronda d'atacs
+			if encombat[0][2] < 1:
+				encombat[0][2] = 0
+				pantalla(encombat[0][0] + " s'ha devilitat",3)
+				time.sleep(0.5)
+				cops = 2
+			if encombat[1][2] < 1:
+				encombat[1][2] = 0
+				pantalla(encombat[1][0] + " s'ha devilitat",3)
+				time.sleep(0.5)
+				cops = 2
+			cops += 1
 		time.sleep(1)
-		
 		# Si es devilita tot l'equip del contrari
 		if contrari[2][2] < 1:
 			encombat[1][2] = 0

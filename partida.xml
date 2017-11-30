@@ -11,4 +11,4 @@
         <pythmon num="8"/>
         <combat cont="3"/>
     </jugador>
-</PYTHMON>
+<jugador nom="Moises"><pythmon num="2"/><pythmon num="5"/><pythmon num="0"/><combat cont="2"/></jugador></PYTHMON>
