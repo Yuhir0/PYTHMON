@@ -11,7 +11,6 @@ import time
 import os
 from lxml import etree
 
-
 # Amb el següent podrem fer clear tant en windows com en linux
 def clear():
     if os.name == "nt":
@@ -27,25 +26,28 @@ def clear():
 Aqui estan tos els pythmon amb el seguient ordre Nom, Tipus, Vida, Atac, Defensa,
 Velocitat, Atac1, Atac2, Atac3.
 """
-pythmon = [["Bulbasaur","Planta",231,147,134,126,"Gigadrenatge"],
-		["Ivysaur","Planta",261,176,162,156,"Gigadrenatge"],
-		["Venusaur","Planta",301,220,202,196,"Gigadrenatge"],
-		["Squirtle","Aigua",229,145,166,122,"Surf"],
-		["Wartortle","Aigua",259,178,196,152,"Surf"],
-		["Blastoise","Aigua",299,222,236,192,"Surf"],
-		["Charmander","Foc",219,154,122,166,"Llançaflames"],
-		["Charmeleon","Foc",257,180,152,196,"Llançaflames"],
-		["Charizard","Foc",297,224,192,236,"Llançaflames"],
-		["Vulpix","Foc",217,129,116,166,"Llançaflames"],
-		["Ninetales","Foc",287,206,186,236,"Llançaflames"],
-		["Exeggcute","Planta",261,127,196,116,"Gigadrenatge"],
-		["Exeggutor","Planta",331,248,206,146,"Gigadrenatge"],
-		["Staryu","Aigua",201,138,146,206,"Surf"],
-		["Starmie","Aigua",261,204,206,266,"Surf"],
-		["Magmar","Foc",271,248,150,222,"Llançaflames"],
-		["Tangela","Planta",271,160,266,156,"Gigadrenatge"],
-		["Lapras","Aigua",401,226,196,156,"Surf"],
-		["Magikarp","Aigua",999,999,999,1]]
+pythmon = [["Bulbasaur","Planta",231,147,134,126,"Fulla_Afilada","Recurrent","Placatge","Drenadores"],
+		["Ivysaur","Planta",261,176,162,156,"Fulla_Afilada","Gigadrenatge","Drenadores","Placatge"],
+		["Venusaur","Planta",301,220,202,196,"Gigadrenatge","Raig_Solar","Esporas","Dansa_Espasa"],
+		["Squirtle","Aigua",229,145,166,122,"Surf","Pistola_Aigua","Acua_Jet","Placatge"],
+		["Wartortle","Aigua",259,178,196,152,"Surf","Acua_Jet","Cop_Cos","Cascada"],
+		["Blastoise","Aigua",299,222,236,192,"Surf","Hidrobomba","Cop_Cos","Dansa_Espasa"],
+		["Charmander","Foc",219,154,122,166,"Ascuas","Atac_Rapid","Ullal_Igni","Placatge"],
+		["Charmeleon","Foc",257,180,152,196,"Llançaflames","Ullal_Igni","Placatge","Dansa_Espasa"],
+		["Charizard","Foc",297,224,192,236,"Llançaflames","Flamarada","Hiper_Raig","Cop_Cos"],
+		["Vulpix","Foc",217,129,116,166,"Llançaflames","Ascuas","Foc_Fatuo","Atac_Rapid"],
+		["Ninetales","Foc",287,206,186,236,"Llançaflames","Foc_Fatuo","Flamarada","Atac_Rapid"],
+		["Exeggcute","Planta",261,127,196,116,"Fulla_Afilada","Gigadrenatge","Recurrent","Placatge"],
+		["Exeggutor","Planta",331,248,206,146,"Gigadrenatge","Esporas","Raig_Solar","Hiper_Raig"],
+		["Staryu","Aigua",201,138,146,206,"Surf","Atac_Rapid","Acua_Jet","Pistola_Aigua"],
+		["Starmie","Aigua",261,204,206,266,"Surf","Atac_Rapid","Hidrobomba","Acua_Jet"],
+		["Magmar","Foc",271,248,150,222,"Llançaflames","Hiper_Raig","Foc_Fatuo","Flamarada"],
+		["Tangela","Planta",271,160,266,156,"Gigadrenatge","Esporas","Drenadores","Raig_Solar"],
+		["Lapras","Aigua",401,226,196,156,"Surf","Cop_Cos","Hidrobomba","Cascada"],
+		["Magikarp","Aigua",999,999,999,1,"Perforador","Esquitxada","Esquitxada","Perforador"]]
+
+# Aquí tenim la llista amb els noms dels entrenadors rivals
+entrenador = [["Marcos","Ana","Marta","Tarazona","teu oponent","Joan","David","Paula","Carles","Sergi","Pablo","Wenceslau","Nacho","Amelia","Joaquim","Xisca","Arantxa","Alvaro"]]
 
 # Es l'apariencia de cada moment del joc (animacions)
 def pantalla(text,escena):
@@ -155,7 +157,7 @@ def Atac(tipus,potencia,atacant,defensor,torn):
 
 mipythmon = [[""],[""],[""]] # Espai per als pythmon del jugador		
 
-# Avans de iniciar el joc et demana un nom
+# Abans d'iniciar el joc et demana un nom
 pantalla("Quin es el tu nom?",0)
 Nom = raw_input()
 
@@ -167,7 +169,7 @@ l'usuari hi es al fitxer xml i preguntar-li si vol continuar la partida
 anterior 
 """
 
-partida = etree.parse('partida.xml') # Carreguem el fixer 'partida.xml' que conte les dades dels jugadrs
+partida = etree.parse('partida.xml') # Carreguem el fixer 'partida.xml' que conté les dades dels jugadors
 jugadors = partida.findall("jugador") # Trobem tots el jugadors
 
 lj = len(jugadors) # Averigüem quants jugadors són
@@ -178,15 +180,15 @@ for i in range(lj):
 		print "Tens una partida començada"
 		p = jugadors[i].findall("pythmon") # Trobem tots els pythmon si el jugador esta registrat
 		
-		for n in range(3):
-			mipythmon[n] = pythmon[int(p[n].attrib["num"])]
+		#for n in range(3):
+			#mipythmon[n] = pythmon[int(p[n].attrib["num"])]
 		combat = int(jugadors[i].find("combat").attrib["cont"]) # El convertim a enter i li assignem a combat
 		break
 	elif i == lj-1 and Nom != jugadors[lj-1].attrib["nom"]:
-		print "Benvingut a la nostra torre Pythmon, guanya\na tots entrenadores i aconsegueix la vicotria"
+		print "Benvingut a la nostra torre Pythmon, guanya tots entrenadors i aconsegueix la victoria"
 
-#if combat > 10: # Si el jugador te mes de 10 combats ja el ha fet tots
-#	exit()
+if combat > 10: # Si el jugador te mes de 10 combats ja el ha fet tots
+	exit()
 if combat > 1 and combat < 10: # Si el jugador ha fet més d'un combat indicara la ronda y pasara al while del joc.
 	print "Vas per la ronda",combat
 	
@@ -203,12 +205,12 @@ else:
 
 	# Demana al jugador que esculli 3 pythmon i els guarda
 	for i in range(3):
-		escull[i] = int(input("Escull el teu " + str(i + 1) + " pythmon: "))
-		#mipythmon[i] = pythmon[escull[i]][:]
+		escull = int(input("Escull el teu " + str(i + 1) + " pythmon: "))
+		mipythmon[i] = pythmon[i][:]
 		
 		# Registrem els pythmon en format xml
-		#p = etree.Element("pythmon", num=str(escull))
-		#noujugador.append(p)
+		p = etree.Element("pythmon", num=str(escull))
+		noujugador.append(p)
 
 	# Mostra els pythmon escollits pel jugador
 	for i in range(3):
@@ -229,7 +231,7 @@ time.sleep(2.5)
 encombat=[[""],[""]]
 contrari = [[""],[""],[""]] # Espai per als pythmon del oponent
 
-# Aqui es desenvolupa la major part del joc.
+# Aquí es desenvolupa la major part del joc.
 while combat <= 10:
 	clear()
 	
@@ -237,22 +239,24 @@ while combat <= 10:
 	for i in range(3):
 		rnd = random.randint(0,17)
 		contrari[i] = pythmon[rnd][:]
-	for i in escull:
-		mipythmon[i] = pythmon[i][:]
-		
+	#for i in escull:
+		#mipythmon[i] = pythmon[i][:]
+	joy = mipythmon[:][:] # Faig que la variable joy tingui les dades dels pythmon del jugador per més endevant
 	rotacio = 0
 	encombat[0] = mipythmon[0]
 	encombat[1] = contrari[rotacio] # Cada cop que es mori un pythmon el contrari canviara al següent
 	
+	entrenador = random.randint(0,17) ################
+	
 	# Comença la animació del principi del combat
-	pantalla(Nom + " el teu oponent sera en Marcos", 0)
+	pantalla(Nom + " el teu oponent sera en ",entrenador, 0)
 	time.sleep(2)
-	pantalla("Marcos a tret a " + encombat[1][0],1)
+	pantalla(entrenador," a tret a " + encombat[1][0],1)
 	time.sleep(1)
 	pantalla("Has tret a " + encombat[0][0], 2)
 	time.sleep(1)
 	
-	# Acaba la animacio d'inici del combat.
+	# Acaba la animació d'inici del combat.
 	while True:
 		pantalla("Fes el teu moviment", 3)
 		print "1)",encombat[0][6],"5) Pythmon"
@@ -299,11 +303,48 @@ while combat <= 10:
 			# Els Atacs
 			if encombat[fst][torn + 5] == "Llançaflames":
 				Atac("Foc", 90,encombat[fst],encombat[snd],torn + 5)
+			elif encombat[fst][torn + 5] == "Flamarada":
+				Atac("Foc", 120,encombat[fst],encombat[snd],torn + 5)
+			elif encombat[fst][torn + 5] == "Ascuas":
+				Atac("Foc", 60,encombat[fst],encombat[snd],torn + 5)
+			elif encombat[fst][torn + 5] == "Ullal_Igni":
+				Atac("Foc", 65,encombat[fst],encombat[snd],torn + 5)
+			elif encombat[fst][torn + 5] == "Foc_Fatuo":
+				Atac("Foc", 0,encombat[fst],encombat[snd],torn + 5)
 			elif encombat[fst][torn + 5] == "Surf":
 				Atac("Aigua", 90,encombat[fst],encombat[snd],torn + 5)
+			elif encombat[fst][torn + 5] == "Hidrobomba":
+				Atac("Aigua", 110,encombat[fst],encombat[snd],torn + 5)
+			elif encombat[fst][torn + 5] == "Pistola_Aigua":
+				Atac("Aigua", 40,encombat[fst],encombat[snd],torn + 5)
+			elif encombat[fst][torn + 5] == "Acua_Jet":
+				Atac("Aigua", 40,encombat[fst],encombat[snd],torn + 5)
+			elif encombat[fst][torn + 5] == "Cascada":
+				Atac("Aigua", 80,encombat[fst],encombat[snd],torn + 5)
 			elif encombat[fst][torn + 5] == "Gigadrenatge":
 				Atac("Planta", 80,encombat[fst],encombat[snd],torn + 5)
-			
+			elif encombat[fst][torn + 5] == "Fulla_afilada":
+				Atac("Planta", 55,encombat[fst],encombat[snd],torn + 5)
+			elif encombat[fst][torn + 5] == "Raig_solar":
+				Atac("Planta", 120,encombat[fst],encombat[snd],torn + 5)
+			elif encombat[fst][torn + 5] == "Recurrent":
+				Atac("Planta", 25,encombat[fst],encombat[snd],torn + 5)
+			elif encombat[fst][torn + 5] == "Esporas":
+				Atac("Planta", 0,encombat[fst],encombat[snd],torn + 5)
+			elif encombat[fst][torn + 5] == "Drenadores":
+				Atac("Planta", 0,encombat[fst],encombat[snd],torn + 5)
+			elif encombat[fst][torn + 5] == "Placatge":
+				Atac("",40,encombat[fst],encombat[snd],torn + 5)
+			elif encombat[fst][torn + 5] == "Atac_Rapid":
+				Atac("",40,encombat[fst],encombat[snd],torn + 5)
+			elif encombat[fst][torn + 5] == "Cop_Cos":
+				Atac("",85,encombat[fst],encombat[snd],torn + 5)
+			elif encombat[fst][torn + 5] == "Dansa_Espasa":
+				Atac("",0,encombat[fst],encombat[snd],torn + 5)
+			elif encombat[fst][torn + 5] == "Perforador":
+				Atac("",9999,encombat[fst],encombat[snd],torn + 5)
+			elif encombat[fst][torn + 5] == "Hiper_Raig":
+				Atac("",150,encombat[fst],encombat[snd],torn + 5)
 			# Quan es devilita el pythmon, s'acaba la ronda d'atacs
 			if encombat[0][2] < 1:
 				encombat[0][2] = 0
@@ -332,7 +373,7 @@ while combat <= 10:
 			rotacio += 1
 			encombat[1] = contrari[rotacio]
 			time.sleep(0.5)
-			pantalla("Marcos a tret a " + encombat[1][0],1)
+			pantalla(entrenador," a tret a " + encombat[1][0],1)
 		
 		# Si es devilita tot l'equip del jugador
 		if mipythmon[0][2] < 1 and mipythmon[1][2] < 1 and mipythmon[2][2] < 1:
@@ -354,6 +395,7 @@ while combat <= 10:
 				escull = int(input())
 			encombat[0] = mipythmon[escull - 1]
 		clear()
+	mipythmon[:][:] = joy # Amb això faig que les estadístiques dels pythmon de l'usuari tornin a l'estat original
 	combat += 1
 	
 	jugadors[num].find("combat").attrib["cont"]=str(combat)
