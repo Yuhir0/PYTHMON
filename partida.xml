@@ -1,4 +1,5 @@
 <PYTHMON>
+    <!-- Exemples de partidas guardades -->
     <jugador nom="Yuhiro">
         <pythmon num="2"/>
         <pythmon num="5"/>
@@ -11,4 +12,5 @@
         <pythmon num="8"/>
         <combat cont="3"/>
     </jugador>
-<jugador nom="Moises"><pythmon num="2"/><pythmon num="5"/><pythmon num="0"/><combat cont="2"/></jugador><jugador nom="oscar"><pythmon num="[1]"/><pythmon num="[1, 2]"/><pythmon num="[1, 2, 3]"/><combat cont="2"/></jugador><jugador nom="ktlrgm"><pythmon num="[3]"/><pythmon num="[3, 8]"/><pythmon num="[3, 8, 17]"/><combat cont="2"/></jugador><jugador nom="Oscar2"><pythmon num="[6]"/><pythmon num="[6, 17]"/><pythmon num="[6, 17, 10]"/><combat cont="11"/></jugador><jugador nom="juan"><pythmon num="17"/><pythmon num="17"/><pythmon num="17"/><combat cont="1"/></jugador><jugador nom="elena"><pythmon num="17"/><pythmon num="17"/><pythmon num="17"/><combat cont="1"/></jugador><jugador nom="luana"><pythmon num="17"/><pythmon num="17"/><pythmon num="17"/><combat cont="1"/></jugador><jugador nom="jdbf"><pythmon num="8"/><pythmon num="8"/><pythmon num="8"/><combat cont="1"/></jugador><jugador nom="jdfnO"><pythmon num="12"/><pythmon num="12"/><pythmon num="12"/><combat cont="1"/></jugador><jugador nom="sdfgs"><pythmon num="12"/><pythmon num="12"/><pythmon num="12"/><combat cont="1"/></jugador><jugador nom="dfknvgsa"><pythmon num="12"/><pythmon num="12"/><pythmon num="12"/><combat cont="1"/></jugador><jugador nom="dsfkawdnbdsjf"><pythmon num="12"/><pythmon num="12"/><pythmon num="12"/><combat cont="1"/></jugador><jugador nom="ef"><pythmon num="12"/><pythmon num="12"/><pythmon num="12"/><combat cont="1"/></jugador><jugador nom="123421"><pythmon num="12"/><pythmon num="12"/><pythmon num="12"/><combat cont="1"/></jugador><jugador nom="hfdhgf"><pythmon num="12"/><pythmon num="12"/><pythmon num="12"/><combat cont="1"/></jugador><jugador nom="werqfd"><pythmon num="12"/><pythmon num="12"/><pythmon num="12"/><combat cont="1"/></jugador><jugador nom="oidsjfkas"><pythmon num="17"/><pythmon num="12"/><pythmon num="8"/><combat cont="1"/></jugador><jugador nom="hjwfa"><pythmon num="17"/><pythmon num="12"/><pythmon num="8"/><combat cont="1"/></jugador></PYTHMON>
+    <!-- /Exemples de partidas guardades -->
+</PYTHMON>
