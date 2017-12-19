@@ -1,4 +1,9 @@
 <PYTHMON>
+    <campio nom="dani">
+        <pythmon num="12"/>
+        <pythmon num="17"/>
+        <pythmon num="8"/>
+    </campio>
     <!-- Exemples de partidas guardades -->
     <jugador nom="Yuhiro">
         <pythmon num="2"/>
@@ -10,7 +15,7 @@
         <pythmon num="2"/>
         <pythmon num="5"/>
         <pythmon num="8"/>
-        <combat cont="3"/>
+        <combat cont="10"/>
     </jugador>
     <!-- /Exemples de partidas guardades -->
-<jugador nom="dani"><pythmon num="17"/><pythmon num="12"/><pythmon num="8"/><combat cont="11"/></jugador></PYTHMON>
+ </PYTHMON>
