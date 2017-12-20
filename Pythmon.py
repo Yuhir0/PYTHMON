@@ -10,9 +10,8 @@
 # Tambe hauras de tenir instal·lada una llibreria externa anomenada python-lxml
 # que es fa servir per generar el fitxer xml amb les dades dels jugadors.
 #
-# Qualsevol dupte sobre el funcionament consulta el 'README' o be posat en contacte
+# Qualsevol dubte sobre el funcionament consulta el 'README' o be posat en contacte
 # amb els propietaris del programa (Oscar Garcia, Daniel Gonzalo) IES Joan d'Àustria
-#
 
 import random, time, os
 
@@ -132,7 +131,6 @@ def pantalla(text,escena):
             print "+-----------------------------------------------------+"
             time.sleep(0.03)
 
-
         time.sleep(0.3)
 
         # Animació de quan el contrari treu un Pythmon
@@ -161,13 +159,12 @@ def pantalla(text,escena):
             print "+-----------------------------------------------------+"
             time.sleep(0.03)
 
-
 # Es defineixen els atacs
 def atac(tipus,potencia,atacant,defensor,torn,efecte):
     mal = 0;
     text = "."
     if potencia > 0:
-        print "Potencia es mayro que 0"
+        print "Potència es major que 0"
         # Atacs molt efectius
         if tipus == "Planta" and defensor[1] == "Aigua" or tipus == "Foc" and defensor[1] == "Planta" or tipus == "Aigua" and defensor[1] == "Foc":
             mal = (potencia + atacant[3] - defensor[4]) * 2
@@ -182,8 +179,6 @@ def atac(tipus,potencia,atacant,defensor,torn,efecte):
         else:
             mal = potencia + atacant[3] - defensor[4]
             text = "."
-
-
 
     probabilitat = random.randint(1,100)
 
@@ -240,13 +235,13 @@ def atac(tipus,potencia,atacant,defensor,torn,efecte):
             atacant[2] = atacant[12]
 
     # Mal
-    if int(mal) < 1: # Si el atac es massa devil sempre fara com a minim 1 de mal
+    if int(mal) < 1: # Si l'atac es massa feble sempre farà com a minim 1 de mal
         pantalla(atacant[0] + " ha usat " + atacant[torn] + text, 4)
         defensor[2] -= 1
     elif random.randint(1,100) <= 5: # Si l'atac entra en el 5% farà el doble de mal (crític)
         pantalla(atacant[0] + " ha usat " + atacant[torn] + text + "\n Ha estat un cop critic", 4)
         defensor[2] -= int(mal) * 2
-    else: # Un atac normal, sense ser molt devil ni critic
+    else: # Un atac normal, sense ser molt devil ni crític
         pantalla(atacant[0] + " ha usat " + atacant[torn] + text, 4)
         defensor[2] -= int(mal)
 
@@ -279,9 +274,9 @@ pythmon = [["Bulbasaur","Planta",231,147,134,126,"Fulla Afilada","Gigadrenatge",
 encombat=[[""],[""]]
 
 """ Aquest petit block comproba si l'usuari te instal·lada la llibreria python-lxml
-Tambe comprovem que el joc s'executa desdel directory PYTHMON per a que tot funcioni correctament """
+També comprovem que el joc s'executa des del directory PYTHMON per a que tot funcioni correctament """
 if not "PYTHMON" in os.getcwd():
-    pantalla("Per a poder jugar a aquest joc, siusplau executa'l des\n del directori PYTHMON sino el joc no s'iniciara'",0)
+    pantalla("Per a poder jugar a aquest joc, si us plau executa'l des\n del directori PYTHMON si no el joc no s'iniciarà'",0)
     time.sleep(7)
     exit()
 
@@ -289,9 +284,9 @@ elif os.name == "nt":
     os.system("dir C:\Python27\lib\site-packages\ >> registre.txt") # Generem un fitxer amb les llibreries instalades
     lista = open("registre.txt","r")
     if not "lxml" in lista.read():
-        pantalla("Per jugar a aquest joc es requereix d'una llibreria\n externa anomenada python-lxml.\n No podras jugar si no te la instal.les.",0)
+        pantalla("Per jugar a aquest joc es requereix d'una llibreria\n externa anomenada python-lxml.\n No podràs jugar si no la tens instal.lada.",0)
         raw_input("Enter per continuar llegint")
-        pantalla("Per instal.lar python-lxml pots anar al directori\n recursos de la carpet PYTHMON i selecciona un dels dos\n instal.lables. O be descarregau de la pagina oficial.",0)
+        pantalla("Per instal.lar python-lxml pots anar al directori\n recursos de la carpeta PYTHMON i selecciona un dels dos\n instal.lables. O be descarrega'l de la pàgina oficial.",0)
         print lista.read()
         lista.close()
         os.system("del registre.txt")
@@ -304,7 +299,7 @@ elif os.name == "posix":
     os.system("dpkg --get-selections | grep python-lxml > registre")
     xml = open("registre", "r")
     while not "python-lxml" in xml.read():
-        pantalla("Per jugar a aquest joc es requereix d'una llibreria\n externa anomenada python-lxml.\n No podras jugar si no te la instal·les.",0)
+        pantalla("Per jugar a aquest joc es requereix d'una llibreria\n externa anomenada python-lxml.\n No podràs jugar si no la tens instal·lada.",0)
         resposta = raw_input("Vols instal·lar-la? (s/N) ")
         if resposta.lower() == "s":
             clear()
@@ -319,7 +314,7 @@ elif os.name == "posix":
         xml = open("registre", "r")
         clear()
         if "python-lxml" in xml.read():
-            pantalla("Gracies per instal·lar-la, hara ja pots jugar.",0)
+            pantalla("Gràcies per instal·lar-la, ara ja pots jugar.",0)
             time.sleep(1.5)
     xml.close()
     os.system("rm registre")
@@ -330,7 +325,7 @@ from lxml import etree
 mipythmon = [[""],[""],[""]] # Espai per als pythmon del jugador
 
 # Abans d'iniciar el joc et demana un nom
-pantalla("Quin es el tu nom?",0)
+pantalla("Quin es el teu nom?",0)
 Nom = raw_input()
 
 combat = 1 # Identifica la ronda per la que va el jugador
@@ -344,7 +339,7 @@ lj = len(jugadors) # Averigüem quants jugadors són
 
 for i in range(lj):
     if Nom == jugadors[i].attrib["nom"]:
-        numj = i # Guardara la pocicio del jugador a la llista
+        numj = i # Desarà la pocició del jugador a la llista
         print "Tens una partida començada"
         p = jugadors[i].findall("pythmon") # Trobem tots els pythmon si el jugador esta registrat
 
@@ -353,10 +348,10 @@ for i in range(lj):
         combat = int(jugadors[i].find("combat").attrib["cont"]) # El convertim a enter i li assignem a combat
         break
     elif i == lj-1 and Nom != jugadors[lj-1].attrib["nom"]:
-        print "Benvingut a la nostra torre Pythmon, guanya tots entrenadors i aconsegueix la victoria"
+        print "Benvingut a la nostra torre Pythmon, guanya a tots els entrenadors i aconsegueix la victoria"
 
 
-if combat > 1 and combat < 11: # Si el jugador ha fet més d'un combat indicara la ronda y pasara al while del joc.
+if combat > 1 and combat < 11: # Si el jugador ha fet més d'un combat indicarà la ronda y pasarà al while del joc.
     print "Vas per la ronda",combat
 
 else:
@@ -412,7 +407,7 @@ while combat <= 10:
         p = partida.find("campio").findall("pythmon")
         for i in range(3):
             contrari[i] = pythmon[int(p[i].attrib["num"])][:]
-        entrenador = partida.find("campio").attrib["nom"] # Nom del entrenador contrari
+        entrenador = partida.find("campio").attrib["nom"] # Nom del entrenador contrari "campio de l'última partida"
     else:
         for i in range(3):
             rnd = random.randint(0,17)
@@ -422,9 +417,9 @@ while combat <= 10:
 
     rotacio = 0
     encombat[0] = mipythmon[0]
-    encombat[1] = contrari[rotacio] # Cada cop que es mori un pythmon el contrari canviara al següent
+    encombat[1] = contrari[rotacio] # Cada cop que es mori un pythmon el contrari canviarà al següent
 
-    # Faig que la variable joy tingui les dades dels pythmon del jugador per més endevant
+    # Faig que la variable joy tingui les dades dels pythmon del jugador per més endevant curar-los.
     joy = []
     for i in mipythmon:
         joy.append(i[:])
@@ -465,9 +460,9 @@ while combat <= 10:
             # Controla que la informació introduida sigui correcte i no pugui canviar a un pythmon que esta devilitat.
             while escull < 1 or escull > 3 or mipythmon[escull - 1][2] < 1:
                 if escull < 1 or escull > 3:
-                    pantalla("Siusplau, introdueix un numero correcte", 4)
+                    pantalla("Siusplau, introdueix un número correcte", 4)
                 else:
-                    pantalla("No pots triar un pythmon devilitat", 4)
+                    pantalla("No pots triar un pythmon debilitat", 4)
 
                 for i in range(3):
                     print str(i+1) + ") " + mipythmon[i][0]
@@ -482,7 +477,9 @@ while combat <= 10:
             fst = 0
             snd = 0
             juga_contrari = random.randint(1,4)
-            if juga > 0 and juga < 5 and (encombat[0][juga + 5] == "Atac Rapid" or encombat[0][juga + 5] == "Acua Jet"): # Si el jugador utilitza un atac amb prioritat, atacarà primer
+
+            # Si el jugador utilitza un atac amb prioritat, atacarà primer
+            if juga > 0 and juga < 5 and (encombat[0][juga + 5] == "Atac Rapid" or encombat[0][juga + 5] == "Acua Jet"):
                 if cops == 0:
                     fst = 0
                     snd = 1
@@ -491,7 +488,9 @@ while combat <= 10:
                     fst = 1
                     snd = 0
                     torn = juga_contrari
-            elif juga > 0 and juga < 5 and (encombat[1][juga_contrari + 5] == "Atac Rapid" or encombat[1][juga_contrari + 5] == "Acua Jet"): # Si l'enemic utilitza un atac amb prioritat, atacarà primer
+
+            # Si l'enemic utilitza un atac amb prioritat, atacarà primer
+            elif juga > 0 and juga < 5 and (encombat[1][juga_contrari + 5] == "Atac Rapid" or encombat[1][juga_contrari + 5] == "Acua Jet"):
                 if cops == 0:
                     fst = 1
                     snd = 0
@@ -500,7 +499,9 @@ while combat <= 10:
                     fst = 0
                     snd = 1
                     torn = juga
-            elif juga > 0 and juga < 5 and encombat[0][5] > encombat[1][5] or juga > 0 and juga < 5 and encombat[0][5] == encombat[1][5]: # Si el jugador ataca i es més ràpid o igual que l'enemic, atacarà primer.
+
+            # Si el jugador ataca i es més ràpid o igual que l'enemic, atacarà primer.
+            elif juga > 0 and juga < 5 and (encombat[0][5] > encombat[1][5] or encombat[0][5] == encombat[1][5]):
                 if cops == 0:
                     fst = 0
                     snd = 1
@@ -509,7 +510,9 @@ while combat <= 10:
                     torn = juga_contrari
                     fst = 1
                     snd = 0
-            elif juga > 0 and juga < 5 and encombat[0][5] < encombat[1][5]: # Si el jugador ataca i es més lent que l'enemic, atacarà segon.
+
+            # Si el jugador ataca i es més lent que l'enemic, atacarà segon.
+            elif juga > 0 and juga < 5 and encombat[0][5] < encombat[1][5]:
                 if cops == 0:
                     fst = 1
                     snd = 0
@@ -518,6 +521,8 @@ while combat <= 10:
                     fst = 0
                     snd = 1
                     torn = juga
+
+            # Si el jugador no ataca
             elif juga > 4:
                 fst = 1
                 snd = 0
@@ -531,13 +536,13 @@ while combat <= 10:
                     son[fst] = 4
                     pantalla(encombat[fst][0] + " s'ha despertat!", 4)
                     time.sleep(1)
-                else: # Si no es desperta se li resta 1 al temps de estar dormit
+                else: # Si no es desperta se li resta '1' al temps de estar dormit
                     pantalla(encombat[fst][0] + " està dormit, no pot atacar!", 4)
                     son[fst] -= 1
                     time.sleep(1)
 
             # Els Atacs
-            if encombat[fst][10] == "P" and random.randint(0,2) == 0:
+            if encombat[fst][10] == "P" and random.randint(0,2) == 0: # Si el pythmon esta paralitzat
                 pantalla(encombat[fst][0] + " està paralitzat, no pot atacar!", 4)
             elif encombat[fst][10] != "S": # Si el pythmon esta adormit no pot atacar
                 retroces = "N"
@@ -579,7 +584,9 @@ while combat <= 10:
                     retroces = atac("Normal",150,encombat[fst],encombat[snd],torn + 5,"N")
                 elif encombat[fst][torn + 5] == "Mossegada":
                     retroces = atac("Normal",60,encombat[fst],encombat[snd],torn + 5,"R20")
-                # Quan es devilita el pythmon, s'acaba la ronda d'atacs
+
+
+                # Quan es debilita el pythmon, s'acaba la ronda d'atacs
                 if encombat[0][2] < 1:
                     encombat[0][2] = 0
                     cops = 2
@@ -588,8 +595,9 @@ while combat <= 10:
                     encombat[1][2] = 0
                     cops = 2
 
+
                 # Si un dels pythmon retrocedeix
-                if retroces == "R" and cops == 0 and encombat[snd][2] > 0: # Si retroces es igual a 'R' vol dir que el pythmon retrocedira
+                if retroces == "R" and cops == 0 and encombat[snd][2] > 0: # Si retrocés es igual a 'R' vol dir que el pythmon retrocedirà
                     time.sleep(1)
                     pantalla(encombat[snd][0] + " ha retrocedit", 4)
                     cops = 2
@@ -600,74 +608,20 @@ while combat <= 10:
 
         time.sleep(1)
 
+
         # Cremada
-        if encombat[0][10] == "C": # Si el pythmon del jugador cremat
-            pantalla(encombat[0][0] + " a rebut mal per la cremada", 4)
+        if encombat[0][10] == "C" and encombat[0][2] > 0: # Si el pythmon del jugador està cremat
+            pantalla(encombat[0][0] + " ha rebut mal per la cremada", 4)
             encombat[0][2] -= int(encombat[0][12] * 0.1)
             time.sleep(1)
 
-        if encombat[1][10] == "C": # Si el pythmon del contrari esta cremat
-            pantalla(encombat[1][0] + " a rebut mal per la cremada", 4)
+        if encombat[1][10] == "C" and encombat[1][2] > 0: # Si el pythmon del contrari està cremat
+            pantalla(encombat[1][0] + " ha rebut mal per la cremada", 4)
             encombat[1][2] -= int(encombat[1][12] * 0.1)
             time.sleep(1)
 
-
-        # Si es devilita tot l'equip del contrari
-        if contrari[2][2] < 1:
-            encombat[1][2] = 0
-            pantalla(encombat[1][0] + " s'ha devilitat",4)
-            time.sleep(1)
-            pantalla("Has guanyat el combat",0)
-            time.sleep(2)
-            break
-
-        # Si es devilita un pythmon del contrari
-        elif encombat[1][2] < 1:
-            encombat[1][2] = 0
-            pantalla(encombat[1][0] + " s'ha devilitat",4)
-            rotacio += 1
-            encombat[1] = contrari[rotacio]
-            time.sleep(0.5)
-            pantalla(entrenador + " a tret a " + encombat[1][0],3)
-
-
-        # Si es devilita tot l'equip del jugador
-        if mipythmon[0][2] < 1 and mipythmon[1][2] < 1 and mipythmon[2][2] < 1:
-            encombat[0][2] = 0
-            pantalla(encombat[0][0] + " s'ha devilitat",4)
-            time.sleep(1)
-            pantalla("Has perdut",0)
-            combat = 100
-            jugadors[numj].find("combat").attrib["cont"]="1"
-            break
-
-       # Si es devilita un pythmon del jugador
-        elif encombat[0][2] < 1:
-            encombat[0][2] = 0
-            pantalla(encombat[0][0] + " s'ha devilitat",4)
-            time.sleep(1)
-            pantalla("Escull pythmon", 4)
-            for i in range(3):
-                print str(i+1) + ") " + mipythmon[i][0]
-            escull = int(input())
-
-            # Controla que la informació introduida sigui correcte i no pugui canviar a un pythmon que esta devilitat
-            while escull < 1 or escull > 3 or mipythmon[escull - 1][2] < 1:
-                if escull < 1 or escull > 3:
-                    pantalla("Siusplau, introdueix un numero correcte", 4)
-                else:
-                    pantalla("No pots triar un pythmon devilitat", 4)
-
-                for i in range(3):
-                    print str(i+1) + ") " + mipythmon[i][0]
-
-                escull = int(input())
-
-            encombat[0] = mipythmon[escull - 1]
-
-
         # Drenadoras
-        if encombat[0][11] == "D": # Si el pythmon del jugador te drenadoras
+        if encombat[0][11] == "D" and encombat[0][2] > 0: # Si el pythmon del jugador té drenadoras
             pantalla(encombat[1][0] + " ha drenat vida de "  + encombat[0][0], 4)
             encombat[0][2] -= int(encombat[0][12] * 0.125)
             encombat[1][2] += int(encombat[0][12] * 0.125)
@@ -677,7 +631,7 @@ while combat <= 10:
                 encombat[0][2] = 0
             time.sleep(1)
 
-        if encombat[1][11] == "D": # Si el pythmon del contrari te drenadoras
+        if encombat[1][11] == "D" and encombat[1][2] > 0: # Si el pythmon del contrari té drenadoras
             pantalla(encombat[0][0] + " ha drenat vida de "  + encombat[1][0], 4)
             encombat[1][2] -= int(encombat[1][12] * 0.125)
             encombat[0][2] += int(encombat[1][12] * 0.125)
@@ -686,6 +640,60 @@ while combat <= 10:
             if encombat[1][2] < 1:
                 encombat[1][2] = 0
             time.sleep(1)
+
+
+        # Si es debilita tot l'equip del contrari
+        if contrari[2][2] < 1:
+            encombat[1][2] = 0
+            pantalla(encombat[1][0] + " s'ha devilitat",4)
+            time.sleep(1)
+            pantalla("Has guanyat el combat",0)
+            time.sleep(2)
+            break
+
+        # Si es debilita un pythmon del contrari
+        elif encombat[1][2] < 1:
+            encombat[1][2] = 0
+            pantalla(encombat[1][0] + " s'ha debilitat",4)
+            rotacio += 1
+            encombat[1] = contrari[rotacio]
+            time.sleep(0.5)
+            pantalla(entrenador + " a tret a " + encombat[1][0],3)
+
+
+        # Si es debilita tot l'equip del jugador
+        if mipythmon[0][2] < 1 and mipythmon[1][2] < 1 and mipythmon[2][2] < 1:
+            encombat[0][2] = 0
+            pantalla(encombat[0][0] + " s'ha debilitat",4)
+            time.sleep(1)
+            pantalla("Has perdut",0)
+            combat = 100
+            jugadors[numj].find("combat").attrib["cont"]="1"
+            break
+
+       # Si es debilita un pythmon del jugador
+        elif encombat[0][2] < 1:
+            encombat[0][2] = 0
+            pantalla(encombat[0][0] + " s'ha debilitat",4)
+            time.sleep(1)
+            pantalla("Escull pythmon", 4)
+            for i in range(3):
+                print str(i+1) + ") " + mipythmon[i][0]
+            escull = int(input())
+
+            # Controla que la informació introduïda sigui correcte i no pugui canviar a un pythmon que esta debilitat
+            while escull < 1 or escull > 3 or mipythmon[escull - 1][2] < 1:
+                if escull < 1 or escull > 3:
+                    pantalla("Si us plau, introdueix un número correcte", 4)
+                else:
+                    pantalla("No pots triar un pythmon debilitat", 4)
+
+                for i in range(3):
+                    print str(i+1) + ") " + mipythmon[i][0]
+
+                escull = int(input())
+
+            encombat[0] = mipythmon[escull - 1]
 
         clear()
 
