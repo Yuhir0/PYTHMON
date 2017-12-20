@@ -2,15 +2,18 @@
 
 ## Diseny
 
-Basant-nos en la famosa saga de jocs POKEMON em realitzat la nostra versio anomenada PYTHMON (Python Monsters).
+Bassant-nos en la famosa saga de jocs POKEMON em realitzat la nostra versió anomenada PYTHMON (Python Monsters).
 
-Ens em basat en les caracteristiques de les diferents generacions de Pokemon, però principalment en les de primera generació
+Ens em bassat en les característiques de les diferents generacions de Pokémon, però principalment en les de la primera generació
 
-Els Pythmon nomes tenen un tipus i hi han tres: Foc, Planta, Aigua.
+Els Pythmon només tenen un tipus: Foc, Planta o Aigua.
 Hi ha atacs dels tres tipus i de tipus normal.
-Em fet que els tipus tinguin la següent relacio Foc > Planta > Aigua > Foc.
+Em fet que els tipus tinguin la següent relació Foc > Planta > Aigua > Foc.
 Si es molt efectiu el mal augmenta x2, si es poc efectiu el mal disminueix x0.5, si es normal (ex. Foc vs Foc)
-
+El jugador començarà escollint 3 Pythmon per jugar.
+A la pantalla es mostra el Pythmon enemic i el Pythmon del jugador amb la seva vida i el seu estat (Pot estar dormit, cremat, paralitzat o amb drenadores).
+Les opcions que té el jugador en el combat son els 4 atacs i l'opció de canviar de Pythmon, si el jugador canvia de Pythmon el Pythmon rival atacarà al Pythmon que treu el jugador.
+Si el jugador guanya als 10 entrenadors, passarà a ser el campió i serà l'últim entrenador rival (amb els Pythmon que hagi escollit per guanyar) per als pròxims jugadors.
 ## Opcions per al normal funcionament
 
 Per a poder jugar a aquest joc requereix:
