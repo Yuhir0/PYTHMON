@@ -11,9 +11,13 @@ Hi ha atacs dels tres tipus i de tipus normal.
 Em fet que els tipus tinguin la següent relació Foc > Planta > Aigua > Foc.
 Si es molt efectiu el mal augmenta x2, si es poc efectiu el mal disminueix x0.5, si es normal (ex. Foc vs Foc)
 El jugador començarà escollint 3 Pythmon per jugar.
+
 A la pantalla es mostra el Pythmon enemic i el Pythmon del jugador amb la seva vida i el seu estat (Pot estar dormit, cremat, paralitzat o amb drenadores).
+
 Les opcions que té el jugador en el combat son els 4 atacs i l'opció de canviar de Pythmon, si el jugador canvia de Pythmon el Pythmon rival atacarà al Pythmon que treu el jugador.
+
 Si el jugador guanya als 10 entrenadors, passarà a ser el campió i serà l'últim entrenador rival (amb els Pythmon que hagi escollit per guanyar) per als pròxims jugadors.
+
 ## Opcions per al normal funcionament
 
 Per a poder jugar a aquest joc requereix:
