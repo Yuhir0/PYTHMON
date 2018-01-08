@@ -13,6 +13,7 @@
 # Qualsevol dupte sobre el funcionament consulta el 'README' o be posat en contacte
 # amb els propietaris del programa (Oscar Garcia, Daniel Gonzalo) IES Joan d'Àustria
 #
+# Texto añadido para la version alternativa que no sirve para nada
 
 import random, time, os
 
